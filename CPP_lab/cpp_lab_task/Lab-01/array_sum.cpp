@@ -1,0 +1,14 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int a[7] = {4,7,6,3,5,7,5};
+    int sum=0;
+
+    for(int i=1; i<=7; i++)
+    {
+        sum=sum+a[i];
+    }
+    cout<<"sum= "<<sum;
+    return 0;
+}
