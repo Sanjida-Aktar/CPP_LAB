@@ -57,7 +57,7 @@ int main(){
      Student st4("sanjida", 4,1.89);
      Student st5("israt", 5, 2.00);
 
-     st1.getStatus(3.3);
+     st1.getStatus(4.3);
      st2.getStatus();
      st3.getStatus();
      st4.getStatus();
