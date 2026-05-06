@@ -6,6 +6,8 @@ class Employee
 public:
     virtual double calculateSalary() = 0;
     virtual double calculateBonus() = 0;
+    virtual double calculateTax()=0;
+    virtual double netSalary()=0;
     virtual ~Employee() {};
 };
 
@@ -26,6 +28,15 @@ public:
     double calculateBonus() override
     {
         return (salary * 0.5);
+    }
+
+    double calculateTax() override
+    {
+        return salary+calculateBonus() * 0.1;
+    }
+    double netSalary() override
+    {
+        return (calculateSalary() + calculateBonus()) - calculateTax();
     }
 };
 
@@ -52,6 +63,16 @@ public:
         double bonus = (int)(hours / 20) * 1000;
         return bonus;
     }
+
+    double calculateTax() override
+    {
+        return ((calculateSalary() + calculateBonus()) * 0.05);
+    }
+
+    double netSalary() override
+    {
+        return (calculateSalary() + calculateBonus()) - calculateTax();
+    }
 };
 
 class ContractualEmployee : public Employee
@@ -74,21 +95,32 @@ public:
     {
         return (project_count / 5) * 0.25 * salary;
     }
+    double calculateTax() override
+    {
+        return ((calculateSalary() + calculateBonus()) * 0.07);
+    }
+    double netSalary() override
+    {
+        return (calculateSalary() + calculateBonus()) - calculateTax();
+    }
 };
 
 void display(Employee *e)
 {
     cout << "total salary: " << e->calculateSalary() << endl;
     cout << "total bonus: " << e->calculateBonus() << endl;
+    cout << "total tax: " << e->calculateTax() << endl;
+    cout << "Net Salary: "<< e->netSalary() << endl;
+     cout << "-----------------------------" << endl;
 }
 
 int main()
 {
-    Employee *e;
     FulltimeEmployee fe(50000.00);
     ParttimeEmployee pe(20, 150.00);
     ContractualEmployee ce(10000.00, 5);
    
+    Employee *e;
     e = &fe;
     display(e);
     e = &pe;
